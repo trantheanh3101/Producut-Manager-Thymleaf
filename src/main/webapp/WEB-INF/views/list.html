@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="/layout::linkBootstrap"></th:block>
+</head>
+<body>
+    <nav th:replace="/layout::navbar"></nav>
+    <div class="container">
+        <p style="color: blue" th:text="${message}"></p>
+        <button class="btn btn-primary mt-4" onclick="window.location.href='/create'">Thêm</button>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>ID</th>
+                <th>Name product</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Manufacturer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product, iterStat: ${products}">
+                <td th:text="${iterStat.count}"></td>
+                <td th:text="${product.getId()}"></td>
+                <td th:text="${product.getName()}"></td>
+                <td th:text="${product.getPrice()}"></td>
+                <td th:text="${product.getDescription()}"></td>
+                <td th:text="${product.getManufacturer()}"></td>
+                <td>
+                    <button class="btn btn-warning"
+                            th:onclick="'window.location.href = \'' + @{/edit/{id}(id=${product.id})} + '\''">Sửa
+                    </button>
+                    <button class="btn btn-danger">Xóa
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
